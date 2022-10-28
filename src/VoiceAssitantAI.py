@@ -1,4 +1,5 @@
 from queue import Empty
+from urllib import response
 import speech_recognition as s
 import pyttsx3 
 import datetime
@@ -65,65 +66,71 @@ if __name__=='__main__':
     hour=datetime.datetime.now().hour
     if hour>0 and hour<12:
         speak("Hello, Good Morning,")
-        speak("Tell me how can I help you now?")
+        speak("Please tell me how can I help you?")
         print('Hello, Good Morning')
-        print("Tell me how can I help you now?")
+        print("Please tell me how can I help you?")
     elif hour>=12 and hour<18:
         speak("Hello,Good Afternoon")
-        speak("Tell me how can I help you now?")
+        speak("Please tell me how can I help you?")
         print("Hello,Good Afternoon")
-        print("Tell me how can I help you now?")
+        print("Please tell me how can I help you?")
     else:
         speak("Hello,Good Evening")
-        speak("Tell me how can I help you now?")
+        speak("Please tell me how can I help you?")
         print("Hello,Good Evening")
-        print("Tell me how can I help you now?")
+        print("Please tell me how can I help you?")
 
     while True:
         print(Fore.LIGHTBLUE_EX + "User: " + Style.RESET_ALL, end="")
         inp = takeCommand().lower()
         if inp is None:
             continue
-        if "quit" in inp or "good bye" in inp or "ok bye" in inp or "stop" in inp:
+        if "quit" in inp or "good bye" in inp or "ok bye" in inp or "stop" in inp: #Test this, there might be some error with the AI not exiting after exit [statment(s)/word(s)] have been spoken
             speak('Good bye')
             print('Good bye')
             break
         elif 'wikipedia' in inp:
-            speak('Searching Wikipedia...')
-            inp =inp.replace("wikipedia", "")
-            results = wikipedia.summary(inp, sentences=3)
+            speak('Please wait, searching wikipedia...')
+            #inp = inp.replace("wikipedia", "")
+            results = wikipedia.summary(inp.replace("wikipedia", ""), sentences=5)
             speak("According to Wikipedia")
             print(results)
             speak(results)
         elif 'open youtube' in inp:
             webbrowser.open_new_tab("https://www.youtube.com")
-            speak("youtube is open now")
+            speak("Please wait, opening youtube")
+            speak("youtube is now open")
+            print("youtube is now open")
             time.sleep(5)
-
         elif 'open google' in inp:
             webbrowser.open_new_tab("https://www.google.com")
-            speak("Google chrome is open now")
+            speak("Please wait, opening google chrome")
+            speak("Google chrome is now open")
             time.sleep(5)
-
+            print("Google Chrome is now open")
         elif 'open gmail' in inp:
             webbrowser.open_new_tab("gmail.com")
-            speak("Google Mail open now")
+            speak("Please wait, opening google mail")
+            speak("Google Mail now open")
             time.sleep(5)
-
-        elif 'ask' in inp:
-            speak("I can answer omputational and geographical questions")
+            print("Goolge Mail (Gmail) is now open")
+        elif 'computational and geographical questions' in inp or 'computational and geographical question' in inp or 'computational questions' in inp or 'computational questions' in inp or 'geographical question' in inp or 'geographical questions' in inp:
+            speak("Please ask me your computational and geographical question")
             question=takeCommand()
             appid = "2WGHR5-HHQ78XU44V"
-            client = wolframalpha.Client("2WGHR5-HHQ78XU44V")
-            res = client.query(question)
+            res = wolframalpha.Client(appid).query(question)
             answer = next(res.results).text
+            print(answer)
+            #If the question is out of computational and geographical scope code [currentlly this block of code is under development]
+            #if answer == None: 
+               #speak("Sorry information is not found")
+                #print("Sorry, Iinformation is not found")
+            #else:
             speak(answer)
             print(answer)
-        
         elif "log off" in inp or "signout" in inp:
             speak("Your PC will log off in 10 seconds, please close all you applications")
             subprocess.call(["shutdown", "/h"])
-
         else:
             result = model.predict(keras.preprocessing.sequence.pad_sequences(tokenizer.texts_to_sequences([inp]),
                                                 truncating='post', maxlen=max_len))
