@@ -3,8 +3,11 @@ from urllib import response
 import speech_recognition as s
 import pyttsx3 
 import datetime
+from queue import Empty
 import wikipedia
 import webbrowser
+import requests
+import json
 import os
 import time
 import subprocess
@@ -49,7 +52,7 @@ def takeCommand():
         return statement
 
 if __name__=='__main__':
-     # load trained model
+      # load trained model
     model = keras.models.load_model('chat_model')
 
     # load tokenizer object
@@ -89,6 +92,18 @@ if __name__=='__main__':
             speak('Good bye')
             print('Good bye')
             break
+
+        elif 'time' in inp:
+            currentTime=datetime.datetime.now()
+            ttime = currentTime.strftime("%c")
+            print(f"The time is: {ttime}\n")
+            speak(f"the time is {ttime}")
+
+        elif 'search'  in inp:
+            url = 'https://www.google.com/search?q='
+            inp = inp.replace("search", "")
+            webbrowser.open_new(url + inp)
+
         elif 'wikipedia' in inp:
             speak('Please wait, searching wikipedia...')
             #inp = inp.replace("wikipedia", "")
@@ -102,6 +117,13 @@ if __name__=='__main__':
             speak("youtube is now open")
             print("youtube is now open")
             time.sleep(5)
+
+        elif 'who are you' in inp or 'what can you do' in inp:
+            speak('I am a Simple ChatBot. I am programmed to do small tasks')
+
+        elif "who made you" in inp or "who created you" in inp:
+            speak(f"I was built by Ria, Dhruv and Alish")
+            print(f"I was built by Ria, Dhruv and Alish")
         elif 'open google' in inp:
             webbrowser.open_new_tab("https://www.google.com")
             speak("Please wait, opening google chrome")
@@ -131,6 +153,26 @@ if __name__=='__main__':
         elif "log off" in inp or "signout" in inp:
             speak("Your PC will log off in 10 seconds, please close all you applications")
             subprocess.call(["shutdown", "/h"])
+        
+        elif "weather" in inp or "forecast" in inp or "temperature" in inp:
+            APIkey="88ee30e21293490d319a4a25ec3672fa"
+            url="https://api.openweathermap.org/data/2.5/weather?"
+            speak("what is the name of the city")
+            city=takeCommand()
+            urlLink=url+"appid="+APIkey+"&q="+city
+            answer = requests.get(urlLink)
+            weatherToday=answer.json()
+            if weatherToday["cod"]!="404":
+                today=weatherToday["main"]
+                weather = today["temp"]                
+                value = weatherToday["weather"]
+                weather_description = value[0]["description"]
+                speak(f" Temperature in kelvin unit is " +
+                      str(weather))
+                print(f" Temperature in kelvin unit = " +
+                      str(weather))
+            else:
+                speak(" City Not Found ")
         else:
             result = model.predict(keras.preprocessing.sequence.pad_sequences(tokenizer.texts_to_sequences([inp]),
                                                 truncating='post', maxlen=max_len))
