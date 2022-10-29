@@ -91,16 +91,16 @@ if __name__=='__main__':
             print('Good bye')
             break
 
-        elif 'time' in statement:
+        elif 'time' in inp:
             currentTime=datetime.datetime.now()
             ttime = currentTime.strftime("%c")
             print(f"The time is: {ttime}\n")
             speak(f"the time is {ttime}")
 
-        elif 'search'  in statement:
+        elif 'search'  in inp:
             url = 'https://www.google.com/search?q='
-            statement = statement.replace("search", "")
-            webbrowser.open_new(url + statement)
+            inp = inp.replace("search", "")
+            webbrowser.open_new(url + inp)
 
         elif 'wikipedia' in inp:
             speak('Searching Wikipedia...')
@@ -114,10 +114,10 @@ if __name__=='__main__':
             speak("youtube is open now")
             time.sleep(5)
 
-        elif 'who are you' in statement or 'what can you do' in statement:
+        elif 'who are you' in inp or 'what can you do' in inp:
             speak('I am a Simple ChatBot. I am programmed to do small tasks')
 
-        elif "who made you" in statement or "who created you" in statement:
+        elif "who made you" in inp or "who created you" in inp:
             speak(f"I was built by Ria, Dhruv and Alish")
             print(f"I was built by Ria, Dhruv and Alish")
         elif 'open google' in inp:
@@ -146,7 +146,7 @@ if __name__=='__main__':
 
 
         
-        elif "weather" in statement or "forecast" in statement or "temperature" in statement:
+        elif "weather" in inp or "forecast" in inp or "temperature" in inp:
             APIkey="88ee30e21293490d319a4a25ec3672fa"
             url="https://api.openweathermap.org/data/2.5/weather?"
             speak("what is the name of the city")
