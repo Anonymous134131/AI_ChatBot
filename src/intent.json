@@ -3,6 +3,10 @@
      "patterns": ["Hi", "Hey", "Is anyone there?", "Hello", "Hay"],
      "responses": ["Hello", "Hi", "Hi there"]
     },
+    {"tag": "creation",
+    "patterns": ["who made you", "who created you", "who is your creator", "what is your creator name"],
+    "responses":["I was built by Ria, Dhruv and Alish","Smart Devs like Ria, Dhruv, and Alish Created me!","Alish, Dhruv and Ria are my creator"] 
+    },
     {"tag": "goodbye",
      "patterns": ["Bye", "See you later", "Goodbye"],
      "responses": ["See you later", "Have a nice day", "Bye! Come back again"]
@@ -12,12 +16,12 @@
      "responses": ["Happy to help!", "Any time!", "My pleasure", "You're most welcome!"]
     },
     {"tag": "about",
-     "patterns": ["Who are you?", "What are you?", "Who you are?" ],
-     "responses": ["I.m Joana, your bot assistant", "I'm Joana, an Artificial Intelligent bot"]
+     "patterns": ["Who are you?", "What are you?", "Who you are?", "what is your name", "what should I call you", "whats your name" ],
+     "responses": ["I m Jarvis, your bot assistant", "I'm Jarvis, an Artificial Intelligent bot","I am a Jarvis ChatBot. I am programmed to do small tasks"]
     },
     {"tag": "name",
-    "patterns": ["what is your name", "what should I call you", "whats your name?"],
-    "responses": ["You can call me Joana.", "I'm Joana!", "Just call me as Joana"]
+    "patterns": ["what is jarvis", "Full form for Jarvis", "Why is your name Jarvis"],
+    "responses": [" JArvis means Just A Really Very Intelligent System.","Jarvis is Just A Really Very Intelligent System from Iron man."]
     },
     {"tag": "help",
     "patterns": ["Could you help me?", "give me a hand please", "Can you help?", "What can you do for me?", "I need a support", "I need a help", "support me please"],
