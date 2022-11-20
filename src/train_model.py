@@ -1,3 +1,4 @@
+# sourced and refered from https://replit.com/talk/learn/Tensorflow-chat-bot/8342
 import json
 import pickle
 import random 
