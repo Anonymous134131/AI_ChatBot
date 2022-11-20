@@ -1,0 +1,11 @@
+# ignore all unnecessary model nad cache files
+
+__pycache__
+
+tflearn_logs
+
+checkpoint
+
+model.*
+
+training_data
