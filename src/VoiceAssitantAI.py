@@ -142,7 +142,7 @@ if __name__=='__main__':
         # print(inp)
         if inp is None:
             continue
-        if "quit" in inp or "exit" in inp or "good bye" in inp or "ok bye" in inp or "stop" in inp: #Test this, there might be some error with the AI not exiting after exit [statment(s)/word(s)] have been spoken
+        if "quit" in inp or "exit" in inp or "goodbye" in inp or "ok bye" in inp or "stop" in inp: #Test this, there might be some error with the AI not exiting after exit [statment(s)/word(s)] have been spoken
             speak('Good bye')
             print(Fore.GREEN + "ChatBot:" + Style.RESET_ALL,end="")
             print('Good bye')
